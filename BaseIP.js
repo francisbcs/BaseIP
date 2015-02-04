@@ -48,6 +48,16 @@ function Base (address) {
         standard: function () {
             return self.address.join('.');
         },
+        integer: function () {
+            var sum = 0;
+            // http://www.bennadel.com/blog/1830-converting-ip-addresses-to-and-from-integer-values-with-coldfusion.htm
+            // TL;DR: shift each unit over by sets of 8 bits
+            sum += self.address[0] << 24 /* 3 sets */
+            sum += self.address[1] << 16 /* 2 sets */
+            sum += self.address[2] << 8  /* 1 set */
+            sum += self.address[3]
+            return sum;
+        },
         cidr: function () {
             var sum = 0;
 
